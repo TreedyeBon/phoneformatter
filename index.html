@@ -19,12 +19,21 @@
             const inputValue = this.value;
             
             // Remove all non-numeric characters
-            const cleanedValue = inputValue.replace(/\D/g, '');
+            let cleanedValue = inputValue.replace(/\D/g, '');
             
-            // Set the cleaned value to the second input
+            // Check if the cleaned value starts with '380'
+            if (cleanedValue.startsWith('380')) {
+                // Add a plus sign at the beginning if it starts with '380'
+                cleanedValue = '+' + cleanedValue;
+            } else if (cleanedValue) {
+                // Otherwise, prepend '+380' to the cleaned value
+                cleanedValue = '+380' + cleanedValue;
+            }
+            
+            // Set the formatted value to the second input
             document.getElementById('output').value = cleanedValue;
 
-            // Copy the cleaned value to the clipboard
+            // Copy the formatted value to the clipboard
             if (cleanedValue) {
                 navigator.clipboard.writeText(cleanedValue).then(function() {
                     console.log('Number copied to clipboard');
