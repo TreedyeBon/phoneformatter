@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Formatter</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+</head>
+<body>
+    <h1 class="title">Вставте сюди номер:</h1>
+    <input class="input" id="input" placeholder="Вставте сюди номер"/>
+    <h1 class="title">Тут буде очищений номер:</h1>
+    <input class="input" id="output" placeholder="Тут буде очищений номер"/>
+    <script>
+        document.getElementById('input').addEventListener('input', function() {
+            // Get the value from the first input
+            const inputValue = this.value;
+            
+            // Remove all non-numeric characters
+            const cleanedValue = inputValue.replace(/\D/g, '');
+            
+            // Set the cleaned value to the second input
+            document.getElementById('output').value = cleanedValue;
+
+            // Copy the cleaned value to the clipboard
+            if (cleanedValue) {
+                navigator.clipboard.writeText(cleanedValue).then(function() {
+                    console.log('Number copied to clipboard');
+                }).catch(function(err) {
+                    console.error('Could not copy text: ', err);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
